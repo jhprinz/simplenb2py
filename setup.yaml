@@ -1,0 +1,48 @@
+name: simplenb2py
+version: 0.0.1
+
+authors:
+  - Jan-Hendrik Prinz
+
+emails:
+  - jan.prinz@choderalab.org,
+
+description: 'A simple notebook 2 python exporter for nbformat'
+
+long_description: |
+  A notebook exporter to python
+
+classifiers: |
+  Development Status :: 3 - Alpha
+  Intended Audience :: Science/Research
+  Intended Audience :: Developers
+  License :: OSI Approved :: GNU Lesser General
+  Public License v2.1 or later (LGPLv2.1+)
+  Programming Language :: C
+  Programming Language :: Python
+  Programming Language :: Python :: 2
+  Operating System :: Microsoft :: Windows
+  Operating System :: POSIX
+  Operating System :: Unix
+  Operating System :: MacOS
+
+download_url: http://github.com/openpathsampling/openpathsampling
+url: http://www.openpathsampling.org
+
+package_data: []
+
+packages:
+  - simplenb2py
+
+platforms:
+  - Linux
+  - Mac OS X
+  - Windows
+
+released: false
+
+requires:
+  - nbformat
+
+license: LGPL 2.1 or later
+license_file: LICENSE
