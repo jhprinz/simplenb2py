@@ -10,8 +10,45 @@ from nbconvert.exporters.html import HTMLExporter
 
 
 def keep_only_headlines(value, level=5):
-    lines = value.split('\n')
-    lines = [v.strip() + '\n' for v in lines if v.split(' ')[0] == '#' * len(v.split(' ')[0]) and len(v.split(' ')[0]) <= level]
+
+    headline_form = [
+            '\n\n# =============================================================================\n' + \
+            '# {upper}\n' + \
+            '# =============================================================================\n' + \
+            'print """{upper}"""',
+
+            '\n# {text}',
+
+            '\n\n# -----------------------------------------------------------------------------\n' + \
+            '# {text}\n' + \
+            '# -----------------------------------------------------------------------------\n' + \
+            'print """{text}"""\n',
+
+            '\nprint """# {text}"""',
+
+            '\nprint """## {text}"""',
+
+            '\nprint """### {text}"""',
+
+    ]
+
+    lines = []
+
+    for v in value.split('\n'):
+        h_level = len(v.split(' ')[0])
+        h_level = h_level if v.split(' ')[0] == '#' * h_level else 0
+
+        full = v.strip()
+        text = full[h_level + 1:]
+
+        if h_level > 0 and h_level <= level:
+            if len(headline_form[h_level - 1]) > 0:
+                lines.append(
+                    headline_form[h_level - 1].format(
+                        upper=text.upper(),
+                        full=full,
+                        text=text
+                    ))
 
     if len(lines) > 0:
         return '\n'.join(lines) + '\n'
@@ -31,7 +68,6 @@ def remove_ipython_specific(value):
         return ''
 
 
-
 class MyExporter(HTMLExporter):
     """
     My custom exporter
@@ -46,7 +82,7 @@ class MyExporter(HTMLExporter):
         """
         The new file extension is `.test_ext`
         """
-        return '.simple_py'
+        return '.py'
 
     @property
     def template_path(self):

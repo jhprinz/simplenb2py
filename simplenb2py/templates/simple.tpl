@@ -1,8 +1,8 @@
 {%- extends 'null.tpl' -%}
 
-{% block header -%}
+{% block header %}
 # coding: utf-8
-{%- endblock header %}
+{% endblock header %}
 
 {%- block in_prompt -%}{%- endblock in_prompt -%}
 
